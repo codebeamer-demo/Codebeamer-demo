@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<ruleset name="Standard Java Ruleset"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0
+                        https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>일반 Java 프로젝트용 PMD 규칙</description>
+
+    <!-- Best Practices: 권장 코딩 패턴 -->
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="UseVarargs"/>  <!-- 가변인자 강제는 너무 엄격할 수 있음 -->
+        <exclude name="JUnitAssertionsShouldIncludeMessage"/>  <!-- 테스트 메시지 선택적 -->
+    </rule>
+
+    <!-- Code Style: 코드 스타일 및 네이밍 -->
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="AtLeastOneConstructor"/>  <!-- 생성자 강제는 불필요 -->
+        <exclude name="OnlyOneReturn"/>  <!-- 여러 return 허용 -->
+        <exclude name="LongVariable"/>  <!-- 긴 변수명 허용 -->
+        <exclude name="ShortVariable"/>  <!-- 짧은 변수명은 상황에 따라 허용 -->
+        <exclude name="ShortClassName"/>  <!-- 짧은 클래스명 허용 -->
+        <exclude name="ShortMethodName"/>  <!-- 짧은 메소드명 허용 -->
+        <exclude name="CommentDefaultAccessModifier"/>  <!-- default 접근제어자 주석 선택적 -->
+        <exclude name="LocalVariableCouldBeFinal"/>  <!-- final 강제는 너무 엄격 -->
+        <exclude name="MethodArgumentCouldBeFinal"/>  <!-- final 강제는 너무 엄격 -->
+    </rule>
+
+    <!-- 변수 네이밍 규칙 커스터마이징 -->
+    <rule ref="category/java/codestyle.xml/LongVariable">
+        <properties>
+            <property name="minimum" value="50"/>  <!-- 50자 이상만 경고 -->
+        </properties>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml/ShortVariable">
+        <properties>
+            <property name="minimum" value="2"/>  <!-- 1자 변수만 경고 -->
+        </properties>
+    </rule>
+
+    <!-- Design: 설계 원칙 -->
+    <rule ref="category/java/design.xml">
+        <exclude name="LawOfDemeter"/>  <!-- 디미터 법칙은 너무 엄격 -->
+        <exclude name="LoosePackageCoupling"/>  <!-- 패키지 결합도는 프로젝트마다 다름 -->
+        <exclude name="UseUtilityClass"/>  <!-- Utility 클래스 강제는 선택적 -->
+    </rule>
+
+    <!-- 메소드 복잡도 설정 -->
+    <rule ref="category/java/design.xml/CyclomaticComplexity">
+        <properties>
+            <property name="classReportLevel" value="80"/>
+            <property name="methodReportLevel" value="15"/>  <!-- 메소드 복잡도 15 -->
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/NcssCount">
+        <properties>
+            <property name="methodReportLevel" value="60"/>  <!-- 메소드 라인 수 60 -->
+            <property name="classReportLevel" value="500"/>  <!-- 클래스 라인 수 500 -->
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/TooManyMethods">
+        <properties>
+            <property name="maxmethods" value="20"/>  <!-- 클래스당 메소드 20개 -->
+        </properties>
+    </rule>
+
+    <!-- Error Prone: 오류 발생 가능 패턴 -->
+    <rule ref="category/java/errorprone.xml">
+        <exclude name="BeanMembersShouldSerialize"/>  <!-- Bean Serialization 선택적 -->
+        <exclude name="DataflowAnomalyAnalysis"/>  <!-- 데이터 흐름 분석은 오탐 많음 -->
+        <exclude name="NullAssignment"/>  <!-- null 할당은 상황에 따라 필요 -->
+    </rule>
+
+    <!-- Performance: 성능 -->
+    <rule ref="category/java/performance.xml">
+        <exclude name="AvoidInstantiatingObjectsInLoops"/>  <!-- 루프 내 객체 생성은 상황에 따라 필요 -->
+    </rule>
+
+    <!-- Security: 보안 -->
+    <rule ref="category/java/security.xml"/>
+
+    <!-- Multithreading: 멀티스레딩 -->
+    <rule ref="category/java/multithreading.xml">
+        <exclude name="DoNotUseThreads"/>  <!-- Thread 사용은 필요에 따라 허용 -->
+        <exclude name="AvoidUsingVolatile"/>  <!-- volatile은 필요한 경우 사용 -->
+    </rule>
+
+    <!-- Documentation: 문서화 (선택적) -->
+    <rule ref="category/java/documentation.xml/CommentRequired">
+        <properties>
+            <property name="methodWithOverrideCommentRequirement" value="Ignored"/>
+            <property name="accessorCommentRequirement" value="Ignored"/>
+            <property name="classCommentRequirement" value="Required"/>
+            <property name="fieldCommentRequirement" value="Ignored"/>
+            <property name="publicMethodCommentRequirement" value="Ignored"/>
+            <property name="protectedMethodCommentRequirement" value="Ignored"/>
+            <property name="enumCommentRequirement" value="Ignored"/>
+        </properties>
+    </rule>
+
+</ruleset>
