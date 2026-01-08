@@ -42,11 +42,12 @@ log "Test Run Tracker ID: ${TEST_RUN_TRACKER_ID}"
 log "Results Filename: ${FILE}"
 log "Configuration: ${CFG}"
 
-curl -v --location --request POST $URL -u "$USER:$PASS" \
+curl -k -v --location --request POST $URL -u "$USER:$PASS" \
     --form "configuration=$CFG"\
     --form "file=@$FILE"\
 
 	>> ${LOG_FILENAME} 2>&1
+
 
 
 
