@@ -1,7 +1,6 @@
 # Maven Project with Tests
 
-이 프로젝트는 Java Maven 프로젝트로, 기본적인 유틸리티 클래스와 10개의 JUnit 테스트를 포함합니다.....test
-
+이 프로젝트는 Java Maven 프로젝트로, 기본적인 유틸리티 클래스와 10개의 JUnit 테스트를 포함합니다.....
 ## 프로젝트 구조
 
 ```
